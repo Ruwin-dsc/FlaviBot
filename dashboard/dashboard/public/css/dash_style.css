@@ -1,0 +1,244 @@
+.page {
+  display: flex;
+}
+
+#sidebar {
+  min-height: calc(100vh - 48px);
+  width: 230px;
+  transition: .2s;
+  background: #333;
+}
+
+#sidebar.collapse {
+  width: 50px;
+}
+
+.sidebar_svg {
+  vertical-align: middle;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  padding: 1rem;
+  opacity: .25;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  background-color: #2d3748;
+  background-color: rgba(45, 55, 72, var(--bg-opacity));
+}
+
+.sidebar_svg:hover {
+  cursor: pointer;
+}
+
+.svg_sidebar {
+  z-index: 999;
+  display: block;
+}
+
+.buttons_sidebar {
+  margin-bottom: 1.5rem;
+}
+
+#go_to_dashboard {
+  background-color: #2d3748;
+  background-color: rgba(148, 124, 234, .2);
+  border-left-width: 4px;
+  border-color: #fff;
+  border-color: rgba(148, 124, 234, 1);
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#go_to_dashboard.active {
+  border-left-width: 2px;
+}
+
+#go_to_dashboard_server {
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: block;
+  cursor: pointer;
+  text-decoration: inherit;
+  transition: all .3s;
+}
+
+#go_to_dashboard_server:hover {
+  background-color: #2d3748;
+  background-color: rgba(45, 55, 72, var(--bg-opacity));
+  transition: all .3s;
+}
+
+.guilds_page {
+  padding-left: 80px;
+  padding-right: 80px;
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background-color: #23272a;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.choose_g {
+  color: white;
+}
+
+.server-list {
+  margin-top: 1rem;
+}
+
+.server_card {
+  background-color: #333;
+  border: solid 1px #947cea;
+  border-radius: .4em;
+  margin-top: .85rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 3px 2px 0 rgba(0, 0, 0, .6);
+  transition: all .3s;
+  padding: .5rem;
+  margin-bottom: .5rem;
+  justify-content: space-between;
+  display: flex;
+}
+
+.server_card:hover {
+  transform: translate(-3px, -3px);
+  transition: all .3s;
+  box-shadow: 0 10px 3px 0 rgba(0, 0, 0, .1), 0 6px 2px 0 rgba(0, 0, 0, .6);
+}
+
+.config_guild {
+  padding: 0px;
+  height: 50px;
+  align-self: center;
+  width: 200px;
+  border-radius: .4em;
+  transition: all .2s;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  padding: .5rem;
+  border-radius: .25rem;
+  background-color: #5843bd;
+  background-color: rgba(88, 67, 189, var(--bg-opacity));
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  margin-top: 7px;
+  margin-right: 8px;
+}
+
+.config_guild:hover {
+  border-radius: .6em;
+  transition: all .2s;
+}
+
+.invite_guild {
+  padding: 0px;
+  height: 50px;
+  align-self: center;
+  width: 150px;
+  transition: all .2s;
+  width: 8.1rem;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  padding: .5rem;
+  border-radius: .25rem;
+  background-color: #8569e7;
+  background-color: rgba(133, 105, 231, var(--bg-opacity));
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+  margin-top: 7px;
+  margin-right: 8px;
+}
+
+.invite_guild:hover {
+  border-radius: .6em;
+  transition: all .2s;
+}
+
+.name_with_img_guild {
+  padding: .5rem;
+  align-items: center;
+  display: flex;
+}
+
+.name_with_img_guild img {
+  border-radius: 10px;
+  width: 3em;
+  height: 3em;
+  transition: all .2s;
+  max-width: 100%;
+  display: block;
+}
+
+.name_with_img_guild p {
+  margin-left: .5rem;
+  color: white;
+}
+
+.name_with_img_guild img:hover {
+  border-radius: 12.5px;
+  transition: all .2s;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+
+@media (max-width: 740px) {
+
+  .guilds_page {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+}
+
+@media (max-width: 550px) {
+
+  .guilds_page {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .config_guild {
+    height: 50px;
+    width: 100px;
+    padding: 3;
+  }
+
+  .server_card {
+    padding: 0px;
+  }
+
+  .name_with_img_guild {
+    padding: 5;
+  }
+  
+  .name_with_img_guild img {
+    width: 40px;
+    height: 40px;
+
+  }
+
+  #sidebar {
+    width: auto;
+  }
+
+}

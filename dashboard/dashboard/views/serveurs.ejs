@@ -1,0 +1,601 @@
+<html>
+
+<head>
+  <!-- Informations sur la page -->
+  <title><%= stats.name%></title>
+  <meta charset="utf-8">
+  <meta data-n-head="1" name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- embed links -->
+  <meta data-n-head="1" data-hid="description" name="description" content="<%= stats.name%> est un bot multifonction facile à utiliser et configurer.">
+  <meta data-n-head="1" name="image" content="<%= stats.pdp%>">
+  <meta data-n-head="1" name="theme-color" content="#947cea">
+  <link data-n-head="1" rel="icon" type="image/x-icon" href="<%= stats.pdp%>">
+
+  <!-- Importer les styles -->
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/dash_navbar.css">
+  <link rel="stylesheet" href="../../css/footer.css">
+  <link rel="stylesheet" href="../../css/serv_style.css">
+  <link rel="stylesheet" href="../../css/serveur.css">
+  <script data-ad-client="ca-pub-5492275834335978" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <section class="nav_section">
+    <nav class="navigation">
+      <div class="logo">
+        <a href="/">
+          <h3 class="titleBOT"><%= stats.name%></h3>
+        </a>
+      </div>
+
+      <div class="buttons">
+        <div id="hamburger" onclick="mobileclick()">
+          <button>
+            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="fill-current h-3 w-3">
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+          </button>
+        </div>
+        <ul id="nav">
+          <li>
+            <a href="#">Accueil</a>
+          </li>
+          <li>
+            <a href="/infos">Informations</a>
+          </li>
+          <li>
+            <a href="/commands">Commandes</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+          <li>
+            <a href="/status">Status</a>
+          </li>
+        </ul>
+      </div>
+      <ul id="nav_connexion">
+        <li>
+          <%if(user){%>
+          <a href="/dashboard" class="goto_dash">
+            Accéder au dashboard
+          </a>
+          <a href="/logout" class="button_cnt">
+            Déconnexion
+          </a>
+          <%}else{%>
+          <a href="/connexion" class="button_cnt">
+            Connexion
+          </a>
+          <%}%>
+              </li>
+            </ul>
+        </nav>
+      </section>
+      <section id="body">
+        <div class="page">
+
+          <div id="sidebar">
+            <div class="sticky">
+            <div class="sidebar_svg" id="svg_the_sidebar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left svg_sidebar">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </div>
+            <div class="buttons_sidebar"><div>
+              <a href="/dashboard" id="go_to_dashboard" aria-current="page">
+                <span id="txt_to_remove_0">Accueil</span>
+              </a>
+            </div>
+            <div>
+              <a href="/dashboard/serveurs" id="go_to_dashboard_server">
+                <span id="txt_to_remove_1">Serveurs</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+
+          <div class="guilds_page">
+            <div class="break-all">
+              <div class="serv_head">
+                <%user.guilds.filter(r => r.id == stats.g_id).forEach(guild => {%>
+                <%if(guild.icon){%>
+                      <img src="https://cdn.discordapp.com/icons/<%= guild.id%>/<%= guild.icon%>.png">
+                      <%}else{%>
+                      <img src="https://cdn.discordapp.com/embed/avatars/0.png">
+                      <%}%>
+                <h2 class="choose_g"><%= guild.name%></h2>
+                
+              </div>
+
+              <div id="actions2">
+                <a href="/leaderboard/<%= guild.id%>">Classsement des levels</a>
+              </div>
+              <%})%>
+              <div class="container_pref">
+                <form id="form2">
+                  <div class="the_Form" id="formprefix">
+                    <input type="text" id="prefix" value="<%= stats.prefix.prefix%>" maxlength="3" minlength="1" oninput="writing_pref()">
+          <label for="prefix">Modifiez votre préfixe</label>
+          </div>
+          </form>
+          </div>
+
+          <div class="container_wlc">
+            <form id="form">
+              <div class="the_Form">
+                <div class="switch_box_1">
+                  <label class="switch">
+                    <%if(stats.wlc_state.etat_msg_wlcm){%>
+                    <input type="checkbox" name="wlc_etat" id="wlc_etat" checked>
+                    <%}else{%>
+                    <input type="checkbox" name="wlc_etat" id="wlc_etat">
+                    <%}%>
+                        <span class="slider round"></span>
+                      </label>
+                      <h4>Activez les messages de bienvenue.</h4>
+                    </div>
+                    <div class="custom_select_1">
+                      <div class="select-box">
+                          <div class="options-container">
+                            <%stats.g_chan.forEach(channel => {%>
+                    <div class="option">
+                      <input type="radio" class="radio" id="<%= channel.id%>" name="<%= channel.id%>" />
+                      <label for="<%= channel.id%>"># <%= channel.name%></label>
+                    </div>
+                    <%})%>
+                </div>
+                <%if(stats.wlc_chan.wlcm_channel_id){%>
+                <div class="selected" id="<%= stats.wlc_chan.wlcm_channel_id%>">
+                  <% stats.g_chan.filter(r => r.id == stats.wlc_chan.wlcm_channel_id).forEach(channel => {%>
+                  # <%= channel.name%>
+                  <%})%>
+                </div>
+                <%}else{%>
+                <div class="selected" id="none">
+                  Séléctionné un channel de départ
+                </div>
+                <%}%>
+                        </div>
+                      </div>
+                      <div class="custom_area">
+                        <h4>Veuillez renseigner votre message de bienvenue :</h4>
+                        <textarea id="wlc_msg" name="wlc_msg" rows="4" cols="40" maxlength="1500" minlength="11" oninput="writing()" required><%= stats.wlc_msg ? stats.wlc_msg.message_wlcm : ""%></textarea>
+              </div>
+          </div>
+          </form>
+          </div>
+
+          <div class="container_lve">
+            <form id="form1">
+              <div class="the_Form">
+                <div class="switch_box_1">
+                  <label class="switch">
+                    <%if(stats.lve_state.etat_msg_leave){%>
+                    <input type="checkbox" name="lve" id="lve_etat" checked>
+                    <%}else{%>
+                    <input type="checkbox" name="lve" id="lve_etat">
+                    <%}%>
+                        <span class="slider round"></span>
+                      </label>
+                      <h4>Activez les messages de départ.</h4>
+                    </div>
+                    <div class="custom_select_1">
+                      <div class="select-box1">
+                          <div class="options-container1">
+                            <%stats.g_chan.filter(r => r.id != stats.lve_chan.leave_channel_id).forEach(channel => {%>
+                    <div class="option1">
+                      <input type="lve" class="lve" id="<%= channel.id%>" name="<%= channel.id%>" />
+                      <label for="<%= channel.id%>"># <%= channel.name%></label>
+                    </div>
+                    <%})%>
+                </div>
+                <%if(stats.lve_chan.leave_channel_id){%>
+                <div class="selected1" id="<%= stats.lve_chan.leave_channel_id%>">
+                  <% stats.g_chan.filter(r => r.id == stats.lve_chan.leave_channel_id).forEach(channel => {%>
+                  # <%= channel.name%>
+                  <%})%>
+                </div>
+                <%}else{%>
+                <div class="selected1" id="none">
+                  Séléctionné un channel de départ
+                </div>
+                <%}%>
+                        </div>
+                      </div>
+                      <div class="custom_area">
+                        <h4>Veuillez renseigner votre message de départ :</h4>
+                        <textarea id="lve_msg" name="lve_msg" rows="4" cols="40" maxlength="1500" minlength="11" oninput="writing_lve()" required><%= stats.lve_msg ? stats.lve_msg.message_leave : " "%></textarea>
+              </div>
+          </div>
+          </form>
+          </div>
+          <div id="bar">
+            <p id="msg_att">Attention ! Il reste des modifications non enregistrées !</p>
+            <a href="#" id="send" onclick="sendEdit('<%= stats.g_id%>')">Enregistrer</a>
+            <a href="#" id="reinit" onclick="reinit()">Réinitialiser</a>
+          </div>
+          </div>
+          </div>
+          </div>
+          <div class="footer">
+            <footer>
+              <p>Created by FlaviBot's developers for FlaviBot</p>
+            </footer>
+          </div>
+  </section>
+  <script src="../../js/serveurs.js"></script>
+      <script>
+        const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
+
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+  optionsContainer.classList.toggle("active");
+});
+
+optionsList.forEach(o => {
+  o.addEventListener("click", () => {
+    selected.id = o.querySelector("label").attributes[0].nodeValue;
+    selected.innerHTML = o.querySelector("label").innerHTML;
+    optionsContainer.classList.remove("active");
+  });
+});
+
+
+const selected1 = document.querySelector(".selected1");
+const optionsContainer1 = document.querySelector(".options-container1");
+
+const optionsList1 = document.querySelectorAll(".option1");
+
+selected1.addEventListener("click", () => {
+  optionsContainer1.classList.toggle("active");
+});
+
+optionsList1.forEach(o => {
+  o.addEventListener("click", () => {
+    selected1.id = o.querySelector("label").attributes[0].nodeValue;
+    selected1.innerHTML = o.querySelector("label").innerHTML;
+    optionsContainer1.classList.remove("active");
+  });
+});
+
+let wlc_msg_button = document.getElementById("wlc_msg");
+let lve_msg_button = document.getElementById("lve_msg");
+let pref_button = document.getElementById("prefix");
+
+let wlc_active = "<%= stats.wlc_state ? stats.wlc_state.etat_msg_wlcm : false%>";
+let wlc_c = "<%=stats.wlc_chan.wlcm_channel_id ? stats.wlc_chan.wlcm_channel_id : false%>";
+let wlc_msg = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+let lve_active = "<%= stats.lve_state.etat_msg_leave ? stats.lve_state.etat_msg_leave : false%>";
+let lve_c = "<%=stats.lve_chan.leave_channel_id ? stats.wlc_chan.leave_channel_id : false%>";
+let lve_msg = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+let pref = "<%= stats.prefix.prefix%>"
+
+wlc_active == "false" ? wlc_active = false : wlc_active = true;
+lve_active == "false" ? lve_active = false : lve_active = true;
+wlc_c ? wlc_c : wlc_c = false;
+lve_c ? lve_c : lve_c = false;
+pref ? pref : pref = "!"
+pref_button.value = pref;
+
+const wlc_etat_button = document.getElementById("wlc_etat");
+const lve_etat_button = document.getElementById("lve_etat");
+
+const bar = document.getElementById("bar");
+wlc_etat_button.addEventListener("click", () => {
+  if (wlc_etat.checked != wlc_active) {
+    bar.classList.add("active")
+  } else {
+    const selected = document.querySelector(".selected");
+    const selected1 = document.querySelector(".selected1");
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (lve_etat_button.checked == lve_active && text == wlc_msg && text1 == lve_msg && text2 == pref) {
+      if (selected.id == lve_c || selected.id === "none") {
+        if (selected1.id == lve_c || selected1.id === "none") {
+          bar.classList.remove("active")
+        }
+      }
+    }
+  }
+})
+
+lve_etat_button.addEventListener("click", () => {
+  if (lve_etat_button.checked != lve_active) {
+    bar.classList.add("active")
+  } else {
+    const selected = document.querySelector(".selected");
+    const selected1 = document.querySelector(".selected1");
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (wlc_etat.checked == wlc_active && text == wlc_msg && text1 == lve_msg && text2 == pref) {
+      if (selected.id == lve_c || selected.id === "none") {
+        if (selected1.id == lve_c || selected1.id === "none") {
+          bar.classList.remove("active")
+        }
+      }
+    }
+  }
+});
+
+function writing() {
+  wlc_msg_button = document.getElementById("wlc_msg");
+  let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+  if (text != wlc_msg) {
+    bar.classList.add("active")
+  } else {
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (wlc_etat.checked == wlc_active && lve_etat_button.checked == lve_active && text1 == lve_msg && text2 == pref) {
+      if (selected.id == lve_c || selected.id === "none") {
+        if (selected1.id == lve_c || selected1.id === "none") {
+          bar.classList.remove("active")
+        }
+      }
+    }
+  }
+}
+
+function writing_lve() {
+  lve_msg_button = document.getElementById("lve_msg");
+  let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+  if (text1 !== lve_msg) {
+    bar.classList.add("active")
+  } else {
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (wlc_etat.checked == wlc_active && lve_etat_button.checked == lve_active && text == wlc_msg && text2 == pref) {
+      if (selected.id == lve_c || selected.id === "none") {
+        if (selected1.id == lve_c || selected1.id === "none") {
+          bar.classList.remove("active")
+        }
+      }
+    }
+  }
+}
+
+function writing_pref() {
+  pref_button = document.getElementById("prefix");
+  let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+  if (text2 !== pref) {
+    bar.classList.add("active")
+  } else {
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+    if (wlc_etat.checked == wlc_active && lve_etat_button.checked == lve_active && text == wlc_msg && text1 == lve_msg) {
+      if (selected.id == lve_c || selected.id === "none") {
+        if (selected1.id == lve_c || selected1.id === "none") {
+          bar.classList.remove("active")
+        }
+      }
+    }
+  }
+}
+
+setInterval(() => {
+  const selected = document.querySelector(".selected");
+  const selected1 = document.querySelector(".selected1");
+
+  if (selected.id != wlc_c && selected.id !== "none") {
+    bar.classList.add("active")
+  } else {
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (wlc_etat.checked == wlc_active && lve_etat_button.checked == lve_active && text == wlc_msg && text1 == lve_msg && text2 == pref) {
+      if (selected1.id == lve_c || selected1.id === "none") {
+        bar.classList.remove("active")
+      }
+    }
+  }
+  if (selected1.id != lve_c && selected1.id !== "none") {
+    bar.classList.add("active")
+  } else {
+    let text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none";
+    if (wlc_etat.checked == wlc_active && lve_etat_button.checked == lve_active && text == wlc_msg && text1 == lve_msg && text2 == pref) {
+      if (selected.id == wlc_c || selected.id === "none") {
+        bar.classList.remove("active")
+      }
+    }
+  }
+}, 1000)
+
+window.addEventListener('beforeunload', function(e) {
+  document.getElementById("form").reset();
+  document.getElementById("form1").reset();
+  document.getElementById("form2").reset();
+
+  pref_button.value = pref;
+
+  if (!wlc_c || wlc_c == "false") {
+    selected.id = "none";
+    selected.innerHTML = "Séléctionné un channel de départ";
+  }
+  if (lve_c == "false") {
+    selected1.id = "none";
+    selected1.innerHTML = "Séléctionné un channel de départ";
+  }
+
+  bar.classList.remove("active")
+});
+
+function reinit() {
+  document.getElementById("form").reset();
+  document.getElementById("form1").reset();
+  document.getElementById("form2").reset();
+
+  pref_button.value = pref;
+
+  if (!wlc_c || wlc_c == "false") {
+    selected.id = "none";
+    selected.innerHTML = "Séléctionné un channel de départ";
+  }
+  if (lve_c == "false") {
+    selected1.id = "none";
+    selected1.innerHTML = "Séléctionné un channel de départ";
+  }
+
+  bar.classList.remove("active")
+}
+
+function sendEdit() {
+
+  const url = window.location.origin ?
+    window.location.origin + '/' :
+    window.location.protocol + '/' + window.location.host + '/';
+
+  let text2 = pref_button.value.trim().replace(/\n/g, '<br/>') ? pref_button.value.trim().replace(/\n/g, '<br/>') : "none",
+    text = wlc_msg_button.value.trim().replace(/\n/g, '<br/>') ? wlc_msg_button.value.trim().replace(/\n/g, '<br/>') : "none",
+    text1 = lve_msg_button.value.trim().replace(/\n/g, '<br/>') ? lve_msg_button.value.trim().replace(/\n/g, '<br/>') : "none";
+
+  if (wlc_etat.checked != wlc_active || text != wlc_msg || selected.id != wlc_c && selected.id != "none") {
+    let body = {
+      guild_id: "<%= stats.g_id%>",
+      etat: wlc_etat.checked,
+      lastEtat: wlc_active,
+      chan: selected.id,
+      lastChan: wlc_c,
+      msg: text,
+      lastMsg: wlc_msg
+    };
+
+    fetch(`${url}api/changeInfo/bvn`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(body)
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      if (data.code == "200") {
+        if (wlc_etat.checked != wlc_active) {
+          wlc_active = wlc_etat.checked;
+        }
+        if (selected.id != wlc_c) {
+          wlc_c = selected.id;
+        }
+        if (text != wlc_msg) {
+          wlc_msg = text;
+        }
+
+        bar.classList.remove("active")
+      } else {
+        const msg_att = document.getElementById("msg_att");
+        const bar = document.getElementById("bar");
+
+        msg_att.innerHTML = data.info;
+
+        bar.style.background = "#ff3535"
+
+        setTimeout(() => {
+          bar.style.background = "#333"
+        }, 10 * 1000)
+      }
+
+      
+    })
+
+  }
+
+  if (lve_etat_button.checked != lve_active || text1 != lve_msg || selected1.id != lve_c && selected1.id != "none") {
+    let body = {
+      guild_id: "<%= stats.g_id%>",
+      etat: lve_etat_button.checked,
+      lastEtat: lve_active,
+      chan: selected1.id,
+      lastChan: lve_c,
+      msg: text1,
+      lastMsg: lve_msg
+    };
+
+    fetch(`${url}api/changeInfo/lve`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(body)
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      if (data.code == "200") {
+        if (lve_etat_button.checked != lve_active) {
+          lve_active = lve_etat_button.checked;
+        }
+        if (selected1.id != lve_c) {
+          lve_c = selected1.id;
+        }
+        if (text1 != lve_msg) {
+          lve_msg = text1;
+        }
+
+        bar.classList.remove("active")
+      } else {
+        const msg_att = document.getElementById("msg_att");
+        const bar = document.getElementById("bar");
+
+        msg_att.innerHTML = data.info;
+
+        bar.style.background = "#ff3535"
+
+        setTimeout(() => {
+          bar.style.background = "#333"
+        }, 10 * 1000)
+      }
+    })
+  }
+
+  if (text2 != pref) {
+
+    const body = {
+      guild_id: "<%= stats.g_id%>",
+      prefix: text2,
+      lastPrefix: pref
+    };
+    fetch(`${url}api/changeInfo/prefix`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(body)
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      if (data.code == "200") {
+        pref = data.new;
+        pref_button.value = data.new;
+
+        bar.classList.remove("active")
+      } else {
+        const msg_att = document.getElementById("msg_att");
+        const bar = document.getElementById("bar");
+
+        msg_att.innerHTML = data.info;
+
+        bar.style.background = "#ff3535"
+
+        setTimeout(() => {
+          bar.style.background = "#333"
+        }, 10 * 1000)
+      }
+    })
+  }
+}
+      </script>
+  </body>
+</html>

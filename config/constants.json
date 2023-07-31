@@ -1,0 +1,42 @@
+{
+    "version": "1.0.0",
+
+    "color" : {
+        "blue": "#00bff5",
+        "red": "RED",
+        "green": "GREEN",
+        "purple": "PURPLE",
+        "white": "#fffffe",
+        "orange": "#ff9500",
+        "cyan": "#00ffaa",
+        "success": "#77b255",
+        "fail": "#dd2e44"
+    },
+
+    "title": "FlaviBot",
+
+    "categoryColors": {
+        "default": ":black_large_square:",
+        "bot": "<:system_square:729089745715593637>",
+        "administration": ":orange_square:",
+        "moderation": ":red_square:",
+        "music": ":purple_square:",
+        "giveaway": ":white_large_square:",
+        "fun": ":green_square:",
+        "ticket": ":yellow_square:",
+        "util": ":blue_square:"
+    },
+
+
+
+    
+
+    "devStatus": "<a:chargement:727228583310917734> En développement...",
+
+    "developers": [
+        "360783331962650624",
+        "316639200462241792",
+        "393084344077516811",
+        "355389600044417025"
+    ]
+}

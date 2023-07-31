@@ -1,0 +1,14 @@
+{
+  "bot": {
+    "id": "684773505157431347",
+    "secret": "2oZTqJynuU_fjXrjArCsojKKdxPoSXj7",
+    "callbackURL": "/discord/callback",
+    "scopes": [
+      "identify",
+      "email",
+      "guilds",
+      "guilds.join"
+    ],
+    "prompt": "consent"
+  }
+}

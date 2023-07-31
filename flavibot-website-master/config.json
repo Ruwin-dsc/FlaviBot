@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost",
+  "apiPort": 5050,
+  "basePort": 80,
+  "botSocketPort": 81,
+  "apiSocketPort": 82
+}

@@ -1,0 +1,37 @@
+{
+  "name": "flavibot",
+  "version": "1.0.0",
+  "description": "Bot multi-functions",
+  "main": "index.js",
+  "dependencies": {
+    "@discordjs/opus": "^0.3.3",
+    "@k3rn31p4nic/google-translate-api": "^1.1.1",
+    "base-64": "^1.0.0",
+    "better-sqlite3": "^7.1.1",
+    "canvas": "^2.6.1",
+    "dblapi.js": "^2.4.1",
+    "discord-giveaways": "^4.2.1",
+    "discord.js": "^12.5.1",
+    "enmap": "^5.8.2",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^4.2.7",
+    "figlet": "^1.5.0",
+    "html-entities-decoder": "^1.0.0",
+    "mathjs": "^8.0.1",
+    "node-gyp": "^7.1.2",
+    "node-opus": "^0.3.3",
+    "pg": "^8.5.1",
+    "ping": "^0.3.0",
+    "pm2": "^4.5.0",
+    "socket.io": "^3.0.3",
+    "tiktok-stats": "^1.6.2",
+    "utf8": "^3.0.0",
+    "ytdl-core": "^4.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

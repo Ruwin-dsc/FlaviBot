@@ -1,0 +1,65 @@
+{
+    "discord": {
+        "maintenance": false,
+
+        "prefix": "!",
+        
+        "token":        "Njg0NzczNTA1MTU3NDMxMzQ3.Xl-_Bg.7gNQpzo-StWCZe5DyXlA9IBWEX4",
+        "youtubeAPI":   "AIzaSyA1iTPu3KzJrTvIOCu-5UAAp1q69NnAeIg",
+        "topggtoken":   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDc3MzUwNTE1NzQzMTM0NyIsImJvdCI6dHJ1ZSwiaWF0IjoxNjA0MDcwNjE5fQ.a-HHWx2cGGNvsXYu3I12o7zdGi4A8y1lrglQTmdRMh4",
+
+
+        "botActivities": [
+            {
+                "name": "{prefix}help | {totalGuilds} Servers",
+                "type": "WATCHING"
+            },
+            {
+                "name": "{totalUsers} Users | {premiumUsers} ⭐",
+                "type": "WATCHING"
+            }
+        ],
+
+
+
+        "hostedBy": true,
+        "everyoneMention": true,
+        
+
+
+        "paths": {
+            "commands":     "/commands",
+            "events":       "/events",
+            "extra":        "/extra",
+            "modules":      "/modules",
+            "json":         "/data/json",
+            "website":      "/www"
+        },
+
+
+        "channels": {
+            "welcome":      "748897175509008436",
+            "modoWelcome":  "743026678040887346",
+            "serverLogs":   "748897180726722651",
+            "status":       "748897182501044247",
+            "test":         "694877830202523703"
+        },
+
+        "webhooks": {
+            "feedback":     {"id": "748909209533284413", "key": "I9RBuiU6LaGO-oLNO0Sn3TAMv3bhubq6BQKXamTmlZ0cih_L-KA3c6hvvmzA3fJZ98UK"},
+            "logsDiscord":  {"id": "748907245122879498", "key": "0TBgz23cBcBAui_S5dlD1rQOI2RK3YRAKghoGQJvpwXfKBcB2WNpDR1WkPJAXKe4X2T0"},
+            "logsDM":       {"id": "748908172856656014", "key": "ltZ4vE3JOUI9iwQovkirRZ7kWjDHRul0AX6-gzEo_uvI_HR5PRFCgVFJTVr7D9tZ-oaJ"},
+            "logsCommands": {"id": "748907771654832259", "key": "1NzEN2O6hZU0jlqIaMiRrpTWsVNIYWTu6QEF69Q0Tc5YIp6lgcQihdoKAxdfnwRF9qJR"},
+            "logsErrors":   {"id": "748907578964050030", "key": "DHmh1rOB76UYxVr-HLnDgiLIOuz01Rp_HjQMo0fW1hZ4IHnFgMCv1KskzTuK7DbLaHQ7"},
+            "votes":        {"id": "748909414186221588", "key": "OBgoBI4CqHgOVF4lNlXFR1Js2UoVaMoLOZvoIymheByKtmc9OIk-Y5x2zhzb7dZswdib"},
+            "shardStatus":  {"id": "748909032718204938", "key": "J5--PO5tP8oQn2h38ikq3BS1LMj4WZNe5S0VMyR0riMU-DKGMqQaaN1MrrohgKovQw_u"}
+        }
+    },
+
+    "database": {
+        "host":         "localhost",
+        "user":         "postgres",
+        "password":     "fVqYXsS4JPRHJ84t",
+        "dbname":       "flavidb"
+    }
+}

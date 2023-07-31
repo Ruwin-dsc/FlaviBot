@@ -1,0 +1,139 @@
+<html>
+<head>
+  <!-- Informations sur la page -->
+    <title><%= stats.name%></title>
+    <meta data-n-head="1" charset="utf-8">
+    <meta data-n-head="1" name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- embed links -->
+    <meta data-n-head="1" data-hid="description" name="description" content="<%= stats.name%> est un bot multifonction facile à utiliser et configurer.">
+    <meta data-n-head="1" name="image" content="<%= stats.pdp%>">
+    <meta data-n-head="1" name="theme-color" content="#947cea">
+    <link data-n-head="1" rel="icon" type="image/x-icon" href="<%= stats.pdp%>">
+
+    <!-- Importer les styles -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/dash_navbar.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/dash_style.css">
+    <script data-ad-client="ca-pub-5492275834335978" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+  <section class="nav_section">
+    <nav class="navigation">
+          <div class="logo">
+            <a href="/">
+              <h3 class="titleBOT"><%= stats.name%></h3>
+            </a>
+          </div>
+
+          <div class="buttons">
+              <div id="hamburger" onclick="mobileclick()">
+                <button>
+                  <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="fill-current h-3 w-3">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+                  </svg>
+                </button>
+              </div>
+            <ul id="nav">
+              <li>
+                <a href="#">Accueil</a>
+              </li>
+              <li>
+                <a href="/infos">Informations</a>
+              </li>
+              <li>
+                <a href="/commands">Commandes</a>
+              </li>
+              <li>
+                <a href="/contact">Contact</a>
+              </li>
+              <li>
+                <a href="/status">Status</a>
+              </li>
+            </ul>
+          </div>
+          <ul id="nav_connexion">
+              <li>
+                <%if(user){%>
+                <a href="/dashboard" class="goto_dash">     
+                  Accéder au dashboard
+                </a>
+                <a href="/logout" class="button_cnt">
+                  Déconnexion
+                </a>
+                  <%}else{%>
+                  <a href="/connexion" class="button_cnt">
+                  Connexion
+                </a>
+                  <%}%>
+              </li>
+            </ul>
+        </nav>
+      </section>
+      <section id="body">
+        <div class="page">
+          <div id="sidebar">
+            <div class="sticky">
+            <div class="sidebar_svg" id="svg_the_sidebar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left svg_sidebar">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </div>
+            <div class="buttons_sidebar"><div>
+              <a href="/dashboard" id="go_to_dashboard" aria-current="page">
+                <span id="txt_to_remove_0">Accueil</span>
+              </a>
+            </div>
+            <div>
+              <a href="/dashboard/serveurs" id="go_to_dashboard_server">
+                <span id="txt_to_remove_1">Serveurs</span>
+              </a>
+            </div>
+          </div>
+          </div>
+        </div>
+          <div class="guilds_page">
+            <div class="break-all">
+              <h2 class="choose_g">CHOISISSEZ UN SERVEUR</h2>
+              <div class="server-list">
+                <%user.guilds.filter(r => (r.permissions & 0x00000020) === 0x00000020 && bot.guilds.cache.get(r.id)).forEach(guild => {%>
+                  <div class="server_card">
+                    <div class="name_with_img_guild">
+                      <%if(guild.icon){%>
+                      <img src="https://cdn.discordapp.com/icons/<%= guild.id%>/<%= guild.icon%>.png">
+                      <%}else{%>
+                      <img src="https://cdn.discordapp.com/attachments/748897200955981904/771135636476133376/91_Discord_logo_logos-512.png">
+                      <%}%>
+                      <p><%= guild.name%></p>
+                    </div>
+                    <a href="/dashboard/serveurs/<%= guild.id%>"><button class="config_guild">Configurer <%= stats.name%></button></a>
+                  </div>  
+                <%});%>
+                <%user.guilds.filter(r => (r.permissions & 0x00000020) === 0x00000020 && !bot.guilds.cache.get(r.id)).forEach(guild => {%>
+                  <div class="server_card">
+                    <div class="name_with_img_guild">
+                      <%if(guild.icon){%>
+                      <img src="https://cdn.discordapp.com/icons/<%= guild.id%>/<%= guild.icon%>.png">
+                      <%}else{%>
+                      <img src="https://cdn.discordapp.com/attachments/748897200955981904/771135636476133376/91_Discord_logo_logos-512.png">
+                      <%}%>
+                      <p><%= guild.name%></p>
+                    </div>
+                    <a href="<%= stats.invite%>&guild_id=<%= guild.id%>"><button class="invite_guild">Inviter <%= stats.name%></button></a>
+                  </div>  
+                <%});%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <footer>
+            <p>Created by FlaviBot's developers for FlaviBot</p>
+          </footer>
+      </div>
+      </section>
+      <script src="../../js/dashboard.js"></script>
+  </body>
+</html>
